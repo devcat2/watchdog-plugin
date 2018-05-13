@@ -1,0 +1,37 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:2.3.0'
+    compile 'org.aspectj:aspectjtools:1.8.9'
+    compile 'org.aspectj:aspectjrt:1.8.9'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// 将插件发布到maven中央仓库
+group='com.devcat.watchdogplugin'
+version='1.0.0'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
+
+
+publish {
+    userOrg = 'crystalchi'//bintray.com用户名
+    groupId = 'com.devcat'//jcenter上的路径
+    artifactId = 'watchdog-plugin'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = 'https://github.com/devcat2'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+}
